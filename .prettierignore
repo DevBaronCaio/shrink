@@ -1,0 +1,4 @@
+.next
+src/generated
+pnpm-lock.yaml
+.lavish

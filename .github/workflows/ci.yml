@@ -1,0 +1,54 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shrink-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Qualidade e build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: shrink
+          POSTGRES_PASSWORD: shrink
+          POSTGRES_DB: shrink_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U shrink -d shrink_test"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgresql://shrink:shrink@127.0.0.1:5432/shrink_test
+      DATABASE_URL: postgresql://shrink:shrink@127.0.0.1:5432/shrink_test
+      DIRECT_URL: postgresql://shrink:shrink@127.0.0.1:5432/shrink_test
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm db:deploy
+      - run: pnpm test:integration
+      - run: pnpm build
+      - name: Validar runtime e sessão
+        run: pnpm exec vitest run --project integration tests/integration/session-http.test.ts
+        env:
+          SHRINK_VERIFY_RUNTIME: "1"
