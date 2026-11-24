@@ -8,7 +8,7 @@
 
 ## Funcionalidades
 
-- Login GitHub e Google, sessões no PostgreSQL, perfil, tema, fuso, exportação e exclusão da conta.
+- Cadastro público com e-mail e senha, login GitHub/Google opcional, sessões no PostgreSQL, perfil, tema, fuso, exportação e exclusão da conta.
 - Slug automático ou personalizado, tags, expiração, limite de cliques e campanhas UTM. A listagem oferece busca, filtros e paginação no servidor.
 - Redirecionamento 302 sem cache. O incremento do contador e a gravação do evento são atômicos.
 - Analytics por conta e por link, filtros, comparação, CSV e QR Codes em PNG ou SVG.
@@ -65,7 +65,7 @@ pnpm install --frozen-lockfile
 cp .env.example .env
 ```
 
-Preencha a URL pooled, a URL direta e o segredo Auth.js em .env. Para entrar, configure os provedores OAuth com os callbacks locais descritos no [guia de deploy](docs/DEPLOYMENT.md). A landing e a demonstração funcionam sem OAuth.
+Preencha a URL pooled, a URL direta e o segredo Auth.js em .env. O cadastro por e-mail e senha funciona sem provedores OAuth. GitHub e Google são opções adicionais documentadas no [guia de deploy](docs/DEPLOYMENT.md). A landing e a demonstração também funcionam sem autenticação.
 
 ```bash
 pnpm db:deploy

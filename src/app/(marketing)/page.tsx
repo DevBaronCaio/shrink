@@ -91,7 +91,7 @@ export default function Landing() {
               <Link href="/entrar">Entrar</Link>
             </Button>
             <Button asChild size="sm">
-              <Link href="/entrar">Começar gratuitamente</Link>
+              <Link href="/criar-conta">Começar gratuitamente</Link>
             </Button>
           </div>
         </div>
@@ -228,7 +228,7 @@ export default function Landing() {
           <h2>Crie seu primeiro link</h2>
           <p>Comece com sua conta GitHub ou Google.</p>
           <Button asChild size="lg">
-            <Link href="/entrar">Começar gratuitamente</Link>
+            <Link href="/criar-conta">Começar gratuitamente</Link>
           </Button>
         </section>
       </main>

@@ -76,7 +76,7 @@ export default async function DemoPage({
               <Link href="/docs">API</Link>
             </Button>
             <Button size="sm" asChild>
-              <Link href="/entrar">Criar conta</Link>
+              <Link href="/criar-conta">Criar conta</Link>
             </Button>
           </div>
         </div>

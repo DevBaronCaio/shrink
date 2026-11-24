@@ -1,6 +1,6 @@
 # Publicação em um projeto Vercel
 
-A instância entregue usa [shrink-iota.vercel.app](https://shrink-iota.vercel.app). A primeira publicação foi feita pelo CLI no projeto Shrink. O banco dedicado já tem migrations aplicadas em main, preview e development. Em produção, os provedores OAuth precisam dos quatro valores descritos na seção 4.
+A instância entregue usa [shrink-iota.vercel.app](https://shrink-iota.vercel.app). A primeira publicação foi feita pelo CLI no projeto Shrink. O banco dedicado já tem migrations aplicadas em main, preview e development. Cadastro e login por e-mail e senha não exigem integração externa. Provedores OAuth são opcionais.
 
 ## 1. Neon
 
@@ -42,8 +42,8 @@ Publique por push para main com Git integrado ou execute vercel deploy --prod no
 
 ## 6. Validação de produção
 
-1. Confira GET /api/health com HTTP 200 e status ok. Consulte /demo, /docs e /api/v1/openapi.
-2. Faça login com cada provedor instalado. Crie um link, acesse /r/slug e confira o registro em Analytics.
+1. Confira GET /api/health com HTTP 200 e status ok. Consulte /demo, /docs e /api/v1/openapi. Abra /criar-conta e /entrar.
+2. Crie uma conta com e-mail e senha, entre novamente e confirme que a sessão persiste. Crie um link, acesse /r/slug e confira o registro em Analytics. Teste OAuth somente se os provedores opcionais estiverem configurados.
 3. Crie uma API Key READ, chame a API, revogue a chave e confirme 401. Confira exportação CSV e QR Code.
 4. Em preview, repita a consulta de um link com outra conta e execute a suíte de concorrência em um banco descartável.
 5. Consulte os logs da Vercel, a execução do cron e o consumo do Neon.

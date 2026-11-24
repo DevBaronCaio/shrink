@@ -1,6 +1,7 @@
 # Segurança e privacidade
 
 - Sessões Auth.js persistidas com cookies HttpOnly, SameSite Lax e Secure em HTTPS. OAuth tem proteção CSRF no Auth.js. Server Actions usam a verificação de origem do Next.js e exigem sessão quando privadas. Dois provedores com o mesmo e-mail não são vinculados automaticamente.
+- Cadastro público exige senha de pelo menos 12 caracteres. Senhas são armazenadas com scrypt e salt aleatório; tentativas de cadastro e login são limitadas por rede e por e-mail usando buckets atômicos no PostgreSQL. Contas não são verificadas por e-mail porque o produto não depende de um serviço de envio; acesso ao endereço não é comprovado.
 - A aplicação guarda associações OAuth por provedor e ID remoto. Omite tokens de acesso e atualização persistentes. Avatares são carregados pelo navegador.
 - Os serviços escopam leituras e mutações por proprietário. Chaves usam um segredo aleatório de 256 bits, SHA-256 e comparação em tempo constante. Último uso tem granularidade de até um minuto.
 - Destinos aceitam HTTP(S), sem credenciais embutidas, hosts locais, IPs não públicos, domínio próprio ou entradas de BLOCKED_DOMAINS. A validação é sintática e o servidor não consulta destinos. Mudanças de DNS, redirecionamentos de terceiros e reputação de conteúdo ficam fora do controle.

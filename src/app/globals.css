@@ -772,6 +772,30 @@ main > .split-section {
   color: var(--accent-text);
   font-size: 0.9rem;
 }
+.credential-form {
+  display: grid;
+  gap: 0.9rem;
+}
+.credential-form label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 550;
+}
+.credential-form small,
+.auth-divider,
+.auth-switch {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.auth-divider,
+.auth-switch {
+  text-align: center;
+}
+.auth-switch a {
+  font-weight: 600;
+}
 @media (max-width: 950px) {
   .marketing-nav {
     display: none;
