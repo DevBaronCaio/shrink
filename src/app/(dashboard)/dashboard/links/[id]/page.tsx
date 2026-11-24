@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Download, Pencil, QrCode } from "lucide-react";
+import { ArrowLeft, Download, Pencil, QrCode } from "lucide-react";
 import { requireUser } from "@/modules/auth/auth";
 import { AppError } from "@/lib/errors";
 import { pageQuery, queryString, type PageQuery } from "@/lib/query";
@@ -42,6 +42,11 @@ export default async function LinkAnalyticsPage({
   });
   return (
     <div className="stack views-gap">
+      <Button asChild variant="ghost" size="sm" className="link-list-return">
+        <Link href="/dashboard/links">
+          <ArrowLeft size={16} /> Voltar para links
+        </Link>
+      </Button>
       <PageTitle
         title={link.title}
         description={link.description ?? "Analytics do link"}
@@ -68,6 +73,7 @@ export default async function LinkAnalyticsPage({
       </PageTitle>
       <section className="panel stack link-ident">
         <div>
+          <h2>Link encurtado</h2>
           <a
             className="accent"
             href={link.shortUrl}

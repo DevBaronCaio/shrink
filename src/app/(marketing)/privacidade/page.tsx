@@ -26,10 +26,10 @@ export default function PrivacyPage() {
         <section className="panel analytics-panel">
           <h2>Conta e sessões</h2>
           <p>
-            O login usa GitHub ou Google e associa um identificador do provedor
-            ao seu perfil. Guardamos seu nome, e-mail, avatar e preferências,
-            além dos dados de sessão necessários para manter a conta
-            autenticada.
+            Guardamos seu nome, e-mail, preferências e dados de sessão. No
+            cadastro com senha, armazenamos apenas um hash da senha. Se você
+            entrar com GitHub ou Google, guardamos o identificador do provedor e
+            o avatar, quando disponível.
           </p>
         </section>
         <section className="panel analytics-panel">

@@ -57,7 +57,7 @@ const questions = [
   ],
   [
     "Preciso de conta para experimentar?",
-    "Você pode usar a prévia e explorar a demonstração pública sem conta. Entre com GitHub ou Google para criar links.",
+    "A prévia e a demonstração são públicas. Para criar links, cadastre-se gratuitamente com e-mail e senha.",
   ],
   [
     "O que acontece quando o link expira?",
@@ -226,7 +226,7 @@ export default function Landing() {
         </section>
         <section className="shell final-cta">
           <h2>Crie seu primeiro link</h2>
-          <p>Comece com sua conta GitHub ou Google.</p>
+          <p>Crie sua conta gratuita com e-mail e senha.</p>
           <Button asChild size="lg">
             <Link href="/criar-conta">Começar gratuitamente</Link>
           </Button>

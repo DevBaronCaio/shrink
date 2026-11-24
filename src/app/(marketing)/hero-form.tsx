@@ -6,6 +6,9 @@ import { useState, type FormEvent } from "react";
 import { Check, Link2, LockKeyhole } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { queryString } from "@/lib/query";
+import { webUrl } from "@/modules/campaigns/utm";
+import { MAX_DESTINATION_LENGTH } from "@/modules/links/new-link-path";
 
 export function HeroForm({ origin }: { origin: string }) {
   const reduceMotion = useReducedMotion();
@@ -16,14 +19,8 @@ export function HeroForm({ origin }: { origin: string }) {
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      const url = new URL(destination.trim());
-      if (
-        !["http:", "https:"].includes(url.protocol) ||
-        url.username ||
-        url.password
-      )
-        throw new Error();
-      setPreview(url.href);
+      webUrl(destination);
+      setPreview(destination.trim());
       setError("");
     } catch {
       setPreview("");
@@ -45,7 +42,7 @@ export function HeroForm({ origin }: { origin: string }) {
           type="text"
           placeholder="https://exemplo.com/seu-link"
           value={destination}
-          maxLength={2048}
+          maxLength={MAX_DESTINATION_LENGTH}
           required
           onChange={(event) => {
             setDestination(event.target.value);
@@ -53,7 +50,7 @@ export function HeroForm({ origin }: { origin: string }) {
             setError("");
           }}
         />
-        <Button type="submit">Encurtar link</Button>
+        <Button type="submit">Ver prévia</Button>
       </form>
       {error && (
         <p className="error helper" role="alert">
@@ -68,13 +65,18 @@ export function HeroForm({ origin }: { origin: string }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.16 }}
         >
-          <div>
-            <Check size={16} /> <strong>Prévia</strong>
+          <div className="hero-preview-result">
+            <Check size={16} aria-hidden="true" /> <strong>Prévia</strong>
             <code>{new URL(origin).host}/r/seu-link</code>
           </div>
-          <Link href={`/entrar?destino=${encodeURIComponent(preview)}`}>
-            Entrar e criar
-          </Link>
+          <div className="hero-preview-actions">
+            <Link href={`/criar-conta${queryString({ destino: preview })}`}>
+              Criar conta e encurtar
+            </Link>
+            <Link href={`/entrar${queryString({ destino: preview })}`}>
+              Já tenho conta
+            </Link>
+          </div>
         </motion.div>
       ) : (
         <small className="hero-note">

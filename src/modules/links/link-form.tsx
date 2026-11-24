@@ -17,13 +17,14 @@ import {
 } from "@/modules/campaigns/utm";
 import { saveLinkAction } from "./actions";
 import type { ManagedLink } from "./service";
+import { MAX_DESTINATION_LENGTH } from "./new-link-path";
 
 const formSchema = z.object({
   title: z.string().trim().min(1, "Informe um título.").max(120),
   destinationUrl: z
     .string()
     .trim()
-    .max(2048)
+    .max(MAX_DESTINATION_LENGTH)
     .refine((value) => {
       try {
         webUrl(value);
@@ -142,7 +143,9 @@ export function LinkForm({
       return;
     }
     toast.success(link ? "Link atualizado." : "Link criado.");
-    router.push("/dashboard/links");
+    router.push(
+      link ? "/dashboard/links" : `/dashboard/links/${result.data.id}`,
+    );
   }
 
   return (
@@ -172,7 +175,7 @@ export function LinkForm({
           id="link-destination"
           type="url"
           placeholder="https://example.com/guia"
-          maxLength={2048}
+          maxLength={MAX_DESTINATION_LENGTH}
           aria-invalid={Boolean(errors.destinationUrl)}
           {...register("destinationUrl")}
         />

@@ -3,6 +3,7 @@ import { LinkForm } from "@/modules/links/link-form";
 import { PageTitle } from "@/components/shared/page-title";
 import { pageQuery, type PageQuery } from "@/lib/query";
 import { utmNames, utmSchema } from "@/modules/campaigns/utm";
+import { MAX_DESTINATION_LENGTH } from "@/modules/links/new-link-path";
 
 export const metadata = { title: "Novo link" };
 export default async function NewLinkPage({
@@ -26,7 +27,9 @@ export default async function NewLinkPage({
       <LinkForm
         initialUtm={initialUtm}
         destination={
-          typeof destino === "string" ? destino.slice(0, 2048) : undefined
+          typeof destino === "string"
+            ? destino.slice(0, MAX_DESTINATION_LENGTH)
+            : undefined
         }
       />
     </div>

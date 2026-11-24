@@ -21,7 +21,12 @@ test("cria, edita, redireciona, filtra analytics e gera QR", async ({
   await page.getByLabel("Slug personalizado").fill(slug);
   await page.getByLabel("Tags").fill("docs, e2e");
   await page.getByRole("button", { name: "Criar link", exact: true }).click();
-  await expect(page).toHaveURL(/\/dashboard\/links$/);
+  await expect(page).toHaveURL(/\/dashboard\/links\/[^/?]+$/);
+  await expect(
+    page.getByRole("link", { name: new RegExp(`/r/${slug}$`) }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Copiar link" })).toBeVisible();
+  await page.getByRole("link", { name: "Voltar para links" }).click();
   const row = page.getByRole("row").filter({ hasText: "Guia para teste" });
   await expect(row).toBeVisible();
   await row.getByRole("button", { name: "Ações de Guia para teste" }).click();
