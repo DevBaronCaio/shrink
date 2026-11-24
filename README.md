@@ -2,8 +2,8 @@
 
 **Links menores. Insights maiores.** Crie endereços curtos editáveis e acompanhe seus acessos. Um único projeto Next.js serve a landing, o dashboard, o redirecionamento e a API REST.
 
-- [Demonstração](http://localhost:3000/demo) com dados de exemplo isolados, disponível após iniciar a aplicação.
-- [API pública](http://localhost:3000/docs) com OpenAPI 3.1 e exemplos em cURL, JavaScript, TypeScript e Python.
+- [Instância na Vercel](https://shrink-iota.vercel.app) e [demonstração pública](https://shrink-iota.vercel.app/demo) com dados de exemplo isolados.
+- [API pública](https://shrink-iota.vercel.app/docs) com OpenAPI 3.1 e exemplos em cURL, JavaScript, TypeScript e Python.
 - [Case de portfólio](docs/CASE-STUDY.md) com a arquitetura, os trade-offs e as evidências de teste.
 
 ## Funcionalidades

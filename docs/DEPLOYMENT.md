@@ -1,5 +1,7 @@
 # Publicação em um projeto Vercel
 
+A instância entregue usa [shrink-iota.vercel.app](https://shrink-iota.vercel.app). A primeira publicação foi feita pelo CLI no projeto Shrink. O banco dedicado já tem migrations aplicadas em main, preview e development. Em produção, os provedores OAuth precisam dos quatro valores descritos na seção 4.
+
 ## 1. Neon
 
 Crie um projeto PostgreSQL 16 em AWS US East (N. Virginia) para alinhar com a região Vercel iad1 em vercel.json. Use o branch principal para produção e branches sem dados de produção para preview e desenvolvimento. No diálogo **Connect** do branch, copie a string com **connection pooling** para o runtime e a direta para migrations. Use TLS para ambas.
@@ -8,7 +10,7 @@ Crie um projeto PostgreSQL 16 em AWS US East (N. Virginia) para alinhar com a re
 
 Na Vercel, use **Add New → Project**, selecione o repositório GitHub e escolha Next.js na raiz. Use Node.js 22.x e pnpm com o lockfile versionado. O script de build gera o cliente Prisma e executa o Next.js. Configure a branch main como produção. As demais branches podem gerar previews no mesmo projeto.
 
-No primeiro deploy use o domínio padrão atribuído. Se o projeto já existe, execute vercel link --project shrink e vercel git connect. [Integração GitHub + Vercel](https://vercel.com/docs/git/vercel-for-github).
+No primeiro deploy use o domínio padrão atribuído. Se o projeto já existe, vincule sua conta GitHub em **Account Settings → Authentication** na Vercel, conceda acesso ao repositório privado no app Vercel do GitHub e execute vercel link --project shrink seguido de vercel git connect. [Integração GitHub + Vercel](https://vercel.com/docs/git/vercel-for-github).
 
 ## 3. Ambiente
 
@@ -27,7 +29,7 @@ No Google Cloud, configure **Google Auth Platform**. Crie um cliente OAuth **Web
 | Ambiente        | GitHub                                                  | Google                                                  |
 | --------------- | ------------------------------------------------------- | ------------------------------------------------------- |
 | Desenvolvimento | http://localhost:3000/api/auth/callback/github          | http://localhost:3000/api/auth/callback/google          |
-| Produção        | https://SEU-DOMINIO.vercel.app/api/auth/callback/github | https://SEU-DOMINIO.vercel.app/api/auth/callback/google |
+| Produção        | https://shrink-iota.vercel.app/api/auth/callback/github | https://shrink-iota.vercel.app/api/auth/callback/google |
 | Preview         | https://SEU-PREVIEW.vercel.app/api/auth/callback/github | https://SEU-PREVIEW.vercel.app/api/auth/callback/google |
 
 Inclua AUTH_GITHUB_ID, AUTH_GITHUB_SECRET, AUTH_GOOGLE_ID e AUTH_GOOGLE_SECRET nos ambientes corretos. Gere novo deploy quando esses valores mudarem. [OAuth Apps no GitHub](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app) · [OAuth web no Google](https://developers.google.com/identity/protocols/oauth2/web-server).
